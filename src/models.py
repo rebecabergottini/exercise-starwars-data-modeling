@@ -21,8 +21,8 @@ class Characters(Base):
     gender = Column(String(250))
     birth_year = Column(String(250), nullable=False)
     
-    user_id = Column(Integer, ForeignKey('user_id')),
-    user = relationship(User)
+    user_id = Column(Integer, ForeignKey('user.id')),
+    user = relationship('User')
 
 class Planets(Base):
     __tablename__ = 'planets'
@@ -31,8 +31,8 @@ class Planets(Base):
     population = Column(String(250))
     diameter = Column(String(250), nullable=False)
 
-    user_id = Column(Integer, ForeignKey('user_id')),
-    user = relationship(User)
+    user_id = Column(Integer, ForeignKey('user.id')),
+    user = relationship('User')
 
 class Vehicles(Base):
     __tablename__ = 'vehicles'
@@ -41,24 +41,24 @@ class Vehicles(Base):
     model = Column(String(250))
     speed = Column(String(250), nullable=False)
     
-    user_id = Column(Integer, ForeignKey('user_id')),
-    user = relationship(User)
+    user_id = Column(Integer, ForeignKey('user.id')),
+    user = relationship('User')
 
 class Favorites(Base):
     __tablename__ = 'favorites'
     id = Column(Integer, primary_key=True)
 
     character_id = Column(Integer, ForeignKey('characters.id')),
-    character = relationship(Characters)
+    character = relationship('Characters')
 
     planet_id = Column(Integer, ForeignKey('planets.id')),
-    character = relationship(Planets)
+    character = relationship('Planets')
 
     vehicle_id = Column(Integer, ForeignKey('vehicles.id')),
-    character = relationship(Vehicles)
+    character = relationship('Vehicles')
 
     user_id = Column(Integer, ForeignKey('user.id')),
-    character = relationship(User)
+    character = relationship('User')
 
     def to_dict(self):
         return {}
